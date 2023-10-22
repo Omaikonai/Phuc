@@ -1,27 +1,33 @@
 class Car:
-    def __init__(self, brand, model, price):
+    def __init__(self, id, brand, model, price):
+        self.__id = id
         self.__brand = brand
         self.__model = model
         self.__price = price
         self.__mileage = 0
     
-    def get_brand(self):
+    @property
+    def id(self):
+        return self.__id
+    
+    @property
+    def brand(self):
         return self.__brand
     
-    def get_model(self):
+    @property
+    def model(self):
         return self.__model
     
-    def get_price(self):
+    @property
+    def price(self):
         return self.__price
     
-    def get_mileage(self):
-        return self.__mileage
-    
-    def set_price(self, price):
-        if price <= 0:
-            print('Price must be positive.')
+    @price.setter
+    def price(self, value):
+        if value <= 0:
+            print('Price must greater than 0')
             return
-        self.__price = price
+        self.__price = value
 
     def update_mileage(self, mile):
         if mile <= 0:
