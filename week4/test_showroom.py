@@ -1,5 +1,5 @@
-from show_room import ShowRoom
-from car import Car
+from week5.show_room import ShowRoom
+from week5.car import Car
 
 cx5 = Car(1, 'Honda', 'CX5', 10000)
 kona = Car(2, 'Hyundai', 'Kona', 20000)

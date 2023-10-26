@@ -1,4 +1,4 @@
-from car import Car
+from week5.car import Car
 
 cx5 = Car('Honda', 'CX5', 10000)
 

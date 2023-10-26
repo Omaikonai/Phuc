@@ -4,6 +4,10 @@ class ShowRoom:
     def __init__(self, name):
         self.__name = name
         self.__cars = []
+
+    @property
+    def name(self):
+        return self.__name
     
     def add_car(self, car):
         self.__cars.append(car)
@@ -28,3 +32,11 @@ class ShowRoom:
         print(f'Showing all cars in show room {self.__name}')
         for c in self.__cars:
             c.show_info()
+        
+    def update_price(self, id, new_price):
+        car = self.__find(id)
+        if car is None:
+            print(f'Car with id {id} not found')
+            return
+        car.price = new_price
+        print(f'Updated price of car id {car.id} successfully')
