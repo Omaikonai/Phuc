@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from student import Student
 from tkinter import messagebox as msb
+import csv
 
 class StudentProgram:
     def __init__(self):
@@ -9,6 +10,7 @@ class StudentProgram:
         self.window = tk.Tk()
         self.window.geometry('400x200')
         self.window.title('Student Program')
+        self.window.protocol('WM_DELETE_WINDOW', self.on_exit)
 
         self.students = []
         self.curr = -1
@@ -44,8 +46,10 @@ class StudentProgram:
         self.btn_add.grid(row=4, column=1, columnspan=2)
         self.btn_delete = Button(self.window, text='Delete', command=self.btn_delete_clicked)
         self.btn_delete.grid(row=4, column=3, columnspan=2)
+        self.btn_load = Button(self.window, text='Load', command=self.btn_load_clicked)
+        self.btn_load.grid(row=5, column=1, columnspan=2)
         self.btn_update = Button(self.window, text='Update', command=self.btn_update_clicked)
-        self.btn_update.grid(row=5, column=1, columnspan=4)
+        self.btn_update.grid(row=5, column=3, columnspan=2)
     
     def btn_prev_clicked(self):
         if self.curr == 0:
@@ -102,8 +106,39 @@ class StudentProgram:
 
         self.students[self.curr].name = name
         self.students[self.curr].grade = grade
-        msb.showinfo('Update Student', 'Update successfully') 
+        msb.showinfo('Update Student', 'Update successfully')
 
+    def btn_load_clicked(self):
+        f = open('students.csv', 'r', encoding='utf-8')
+        reader = csv.reader(f)
+        next(reader) # skip header
+        for row in reader:
+            # read student information in a row
+            id = int(row[0])
+            name = row[1]
+            grade = int(row[2])
+            # create a student object
+            student = Student(id, name, grade)
+            # add student object to the list
+            self.students.append(student)
+        
+        self.curr = 0
+        self.show_student()
+        
+        msb.showinfo('Load Students', 'Load all students successfully')
+
+    def on_exit(self):
+        f = open('students.csv', 'w', encoding='utf-8')
+        writer = csv.writer(f)
+        # write the header
+        writer.writerow(['ID', 'Name', 'Grade'])
+        for s in self.students:
+            # write each student data in a row
+            writer.writerow([s.id, s.name, s.grade])
+        f.close()
+
+        self.window.destroy()
+    
     def run(self):
         self.window.mainloop()
 
