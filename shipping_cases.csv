@@ -1,0 +1,24 @@
+Case No,Purpose,Input,Output,Expected Output
+1,"Valid weight, delivery, and discount","3, 'standard', 'LOYALTY10'",,13.5
+2,"Valid weight, delivery, and discount","10, 'express', 'LOYALTY20'",,28
+3,"Valid weight, delivery, and free shipping","25, 'overnight', 'FREESHIP'",,0
+4,"Valid weight and delivery, no discount","5, 'standard', None",,15
+5,"Valid weight and delivery, empty discount","15, 'express', ''",,35
+6,Negative weight,"-5, 'standard', 'LOYALTY10'",,None
+7,Zero weight,"0, 'express', 'LOYALTY20'",,None
+8,Invalid delivery type,"10, 'fast', 'LOYALTY10'",,None
+9,Empty delivery type,"20, '', 'FREESHIP'",,None
+10,None delivery type,"7, None, 'LOYALTY20'",,None
+11,Invalid discount code,"12, 'standard', 'DISCOUNT50'",,None
+12,Invalid discount code,"18, 'overnight', 'XYZ'",,None
+13,Empty discount code,"5, 'express', ' '",,None
+14,"Exact 5 kg weight, standard delivery, no discount","5, 'standard', None",,15
+15,"Just over 5 kg, express delivery, no discount","5.1, 'express', None",,35
+16,"Exact 20 kg weight, overnight delivery, no discount","20, 'overnight', None",,75
+17,"Just over 20 kg, standard delivery, no discount","20.1, 'standard', None",,55
+18,"Medium weight, express delivery, LOYALTY10 discount","10, 'express', 'LOYALTY10'",,31.5
+19,"High weight, overnight delivery, LOYALTY20 discount","30, 'overnight', 'LOYALTY20'",,60
+20,"Low weight, standard delivery, FREESHIP discount","2, 'standard', 'FREESHIP'",,0
+21,"High weight, express delivery, empty discount","22, 'express', ''",,65
+22,"Medium weight, standard delivery, non-existent discount","15, 'standard', 'NONEXISTENT'",,None
+23,"Very high weight, overnight delivery, no discount","50, 'overnight', None",,75
