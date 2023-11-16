@@ -33,3 +33,30 @@ class Employee:
         self.__name = value
 
     @property
+    def salary(self):
+        return self.__salary
+
+    @salary.setter
+    def salary(self, value):
+        if value <= 0:
+            raise ValueError('Salary must be positive')
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError('Salary must be an integer number')
+        
+        self.__salary = value
+    
+    @property
+    def age(self):
+        return self.__age
+    
+    @age.setter
+    def age(self, value):
+        if value < 18 or value > 65:
+            raise ValueError('Age must be in range [18, 65]')
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError('Age must be an integer number')
+        self.__age = value
